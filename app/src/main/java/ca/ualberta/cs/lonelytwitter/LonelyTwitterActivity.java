@@ -68,14 +68,25 @@ public class LonelyTwitterActivity extends Activity {
 				tweetables.add(tweet);
 				tweetables.add(tweet1);
 
+				String CurrentMood = new String();
+				MoodHappy moodHappy= new MoodHappy();
+				MoodSad moodSad = new MoodSad();
 
 
 
 				setResult(RESULT_OK);
 				Spinner mySpinner=(Spinner) findViewById(R.id.spinner1);
 				String mood = mySpinner.getSelectedItem().toString();
+				int result;
+				result = mood.compareTo("happy");
+				if (result== 0){
+					CurrentMood=moodHappy.getCurrentMood();
+				}else{
+					CurrentMood=moodSad.getCurrentMood();
+				}
+
 				String text = bodyText.getText().toString();
-				String newtext = "mood:"+ mood+" | "+ text;
+				String newtext = "mood:"+ CurrentMood+" | "+ text;
 				saveInFile(newtext, new Date(System.currentTimeMillis()));
 				finish();
 
